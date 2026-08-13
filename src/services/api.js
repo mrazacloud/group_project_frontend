@@ -1,7 +1,7 @@
 /**
  * API service — base URL and helper methods for backend communication
  */
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_URL = (process.env.REACT_APP_API_URL || 'http://localhost:3001').replace(/\/+$/, '');
 
 // Get JWT token from localStorage
 const getToken = () => localStorage.getItem('eventhub_token');
