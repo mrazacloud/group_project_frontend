@@ -20,7 +20,7 @@ const Dashboard = () => {
       return;
     }
     eventAPI.list()
-      .then((all) => all.filter((e) => e.organizer._id === user.id))
+      .then((all) => all.filter((e) => e.organizer._id === user._id))
       .then(setEvents)
       .finally(() => setLoading(false));
   }, [user, navigate]);

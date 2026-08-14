@@ -19,7 +19,7 @@ const EditEvent = () => {
   useEffect(() => {
     eventAPI.get(id)
       .then((data) => {
-        if (user && data.organizer._id !== user.id) {
+        if (user && data.organizer._id !== user._id) {
           navigate('/dashboard');
           return;
         }

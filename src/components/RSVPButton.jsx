@@ -14,7 +14,7 @@ const RSVPButton = ({ eventId }) => {
   useEffect(() => {
     if (!user) return;
     rsvpAPI.list(eventId).then((rsvps) => {
-      const mine = rsvps.find((r) => r.user._id === user.id);
+      const mine = rsvps.find((r) => r.user._id === user._id);
       setRsvp(mine || null);
     }).catch(() => {});
   }, [eventId, user]);

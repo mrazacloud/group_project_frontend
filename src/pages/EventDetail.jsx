@@ -55,7 +55,7 @@ const EventDetail = () => {
     return <Alert variant="warning">Event not found.</Alert>;
   }
 
-  const isOwner = user && event.organizer._id === user.id;
+  const isOwner = user && event.organizer._id === user._id;
 
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this event? This cannot be undone.')) return;
