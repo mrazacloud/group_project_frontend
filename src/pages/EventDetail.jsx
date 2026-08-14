@@ -2,7 +2,7 @@
  * EventDetail — single event view with RSVP and history
  */
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Card, Row, Col, Spinner, Alert, Badge } from 'react-bootstrap';
 import { eventAPI, rsvpAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -13,6 +13,7 @@ import HistoryLog from '../components/HistoryLog';
 const EventDetail = () => {
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [event, setEvent] = useState(null);
   const [history, setHistory] = useState([]);
   const [attendees, setAttendees] = useState([]);
@@ -56,6 +57,16 @@ const EventDetail = () => {
 
   const isOwner = user && event.organizer._id === user.id;
 
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this event? This cannot be undone.')) return;
+    try {
+      await eventAPI.delete(id);
+      navigate('/dashboard');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <div>
       <Link to="/" className="btn btn-outline-secondary btn-sm mb-3">&larr; Back to Events</Link>
@@ -98,6 +109,9 @@ const EventDetail = () => {
               <Link to={`/events/${event._id}/edit`} className="btn btn-outline-primary btn-sm me-2">
                 Edit Event
               </Link>
+              <button className="btn btn-outline-danger btn-sm" onClick={handleDelete}>
+                Delete Event
+              </button>
             </div>
           )}
         </Card.Body>

@@ -34,6 +34,16 @@ const Dashboard = () => {
     }
   };
 
+  const handleDelete = async (eventId) => {
+    if (!window.confirm('Are you sure you want to delete this event? This cannot be undone.')) return;
+    try {
+      await eventAPI.delete(eventId);
+      setEvents((prev) => prev.filter((e) => e._id !== eventId));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   if (loading) {
     return <div className="text-center mt-5"><Spinner animation="border" /></div>;
   }
@@ -98,11 +108,19 @@ const Dashboard = () => {
                     <Button
                       size="sm"
                       variant="outline-secondary"
+                      className="me-2"
                       onClick={() => handleStatusChange(event._id, 'completed')}
                     >
                       Complete
                     </Button>
                   )}
+                  <Button
+                    size="sm"
+                    variant="outline-danger"
+                    onClick={() => handleDelete(event._id)}
+                  >
+                    Delete
+                  </Button>
                 </td>
               </tr>
             ))}

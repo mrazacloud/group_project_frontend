@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import EventDetail from './pages/EventDetail';
 import CreateEvent from './pages/CreateEvent';
 import EditEvent from './pages/EditEvent';
+import MyRSVPs from './pages/MyRSVPs';
 import Profile from './pages/Profile';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/events/new" element={<CreateEvent />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/events/:id/edit" element={<EditEvent />} />
+          <Route path="/my-rsvps" element={<MyRSVPs />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>

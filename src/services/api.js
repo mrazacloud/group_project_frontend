@@ -45,6 +45,7 @@ export const eventAPI = {
   update: (id, body) => apiFetch(`/api/events/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
   updateStatus: (id, status) => apiFetch(`/api/events/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
   getHistory: (id) => apiFetch(`/api/events/${id}/history`),
+  delete: (id) => apiFetch(`/api/events/${id}`, { method: 'DELETE' }),
 };
 
 // RSVP endpoints
@@ -52,6 +53,7 @@ export const rsvpAPI = {
   create: (eventId) => apiFetch(`/api/events/${eventId}/rsvp`, { method: 'POST', body: '{}' }),
   cancel: (eventId) => apiFetch(`/api/events/${eventId}/rsvp`, { method: 'PUT', body: '{}' }),
   list: (eventId) => apiFetch(`/api/events/${eventId}/rsvps`),
+  myRSVPs: () => apiFetch('/api/events/my-rsvps'),
 };
 
 export default { authAPI, eventAPI, rsvpAPI };

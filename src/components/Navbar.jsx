@@ -24,6 +24,7 @@ const Navbar = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Events</Nav.Link>
             {user && <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>}
+            {user && <Nav.Link as={Link} to="/my-rsvps">My RSVPs</Nav.Link>}
           </Nav>
           <Nav>
             {user ? (
