@@ -72,6 +72,14 @@ const EventDetail = () => {
       <Link to="/" className="btn btn-outline-secondary btn-sm mb-3">&larr; Back to Events</Link>
 
       <Card className="mb-4">
+        {event.image && (
+          <img
+            src={event.image}
+            alt={event.title}
+            className="event-image-lg"
+            onError={(e) => { e.target.style.display = 'none'; }}
+          />
+        )}
         <Card.Body>
           <div className="d-flex justify-content-between align-items-start">
             <h1 className="mb-3">{event.title}</h1>

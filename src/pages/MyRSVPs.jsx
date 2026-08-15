@@ -8,6 +8,8 @@ import { rsvpAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import StatusBadge from '../components/StatusBadge';
 
+const PLACEHOLDER = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=300&fit=crop';
+
 const MyRSVPs = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -49,6 +51,12 @@ const MyRSVPs = () => {
           {rsvps.map((rsvp) => (
             <Col md={6} lg={4} key={rsvp._id} className="mb-4">
               <Card className="h-100 shadow-sm">
+                <img
+                  src={rsvp.event.image || PLACEHOLDER}
+                  alt={rsvp.event.title}
+                  className="event-image"
+                  onError={(e) => { e.target.src = PLACEHOLDER; }}
+                />
                 <Card.Body className="d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-start mb-2">
                     <Card.Title className="mb-0">{rsvp.event.title}</Card.Title>

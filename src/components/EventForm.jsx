@@ -11,6 +11,7 @@ const EventForm = ({ initialData, onSubmit, submitLabel }) => {
     date: '',
     location: '',
     capacity: '',
+    image: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -22,6 +23,7 @@ const EventForm = ({ initialData, onSubmit, submitLabel }) => {
         date: initialData.date ? initialData.date.substring(0, 10) : '',
         location: initialData.location || '',
         capacity: initialData.capacity || '',
+        image: initialData.image || '',
       });
     }
   }, [initialData]);
@@ -121,6 +123,30 @@ const EventForm = ({ initialData, onSubmit, submitLabel }) => {
         />
         <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback>
       </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Image URL (optional)</Form.Label>
+        <Form.Control
+          name="image"
+          value={form.image}
+          onChange={handleChange}
+          placeholder="https://example.com/image.jpg"
+        />
+        <Form.Text className="text-muted">
+          Paste a link to an image for your event banner
+        </Form.Text>
+      </Form.Group>
+
+      {form.image && (
+        <div className="mb-3">
+          <img
+            src={form.image}
+            alt="Preview"
+            style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '0.375rem' }}
+            onError={(e) => { e.target.style.display = 'none'; }}
+          />
+        </div>
+      )}
 
       <Button variant="primary" type="submit">
         {submitLabel || 'Submit'}
